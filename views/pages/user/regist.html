@@ -7,7 +7,7 @@
 
 <style type="text/css">
 		.login_form{
-			height: 570px;
+			height: 585px;
     		margin-top: -60px;
 		}
 		html,body{
@@ -195,6 +195,16 @@ alert("发送失败");
 });
 })
 </script>
+<script type="text/javascript">
+	function disable()
+	  {
+	  document.getElementById("sub_btn").disabled=true
+	  }
+	function enable()
+	  {
+	  document.getElementById("sub_btn").disabled=false
+	  }
+	</script>
 </head>
 <body background="background.jpg"
 style=" background-repeat:no-repeat ;
@@ -249,8 +259,10 @@ background-attachment: fixed;">
 									<label>推荐人手机：</label>
 									<input class="itxt" type="text" placeholder="请输入推荐人手机号" value="" maxlength="11" autocomplete="off" tabindex="1" name="rec_phone" id="rec_phone" />
 									<br />
-									<br />
-									<input type="submit" value="注册" id="sub_btn" />
+									<div></div>
+									<input type="checkBox" onclick="if (this.checked) {enable()} else {disable()}">  我已阅读并同意<a href="#" style="text-decoration:none;color: blue;">《最好的B2BC商城服务协议》</a>
+									<div></div>
+									<input type="submit" value="注册" disabled="true" id="sub_btn" />
 								</form>
 							</div>
 							
