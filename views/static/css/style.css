@@ -124,7 +124,6 @@ div{
 
 .login_banner{
 	height:475px;
-	background-color: #5080a0;
 }
 
 .login_form{
@@ -197,7 +196,7 @@ h1 {
 #l_content {
 	float: left;
 	margin-top: 150px;
-	margin-left: 260px;
+	margin-left: 290px;
 }
 
 #l_content span {
