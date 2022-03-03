@@ -123,26 +123,26 @@ div{
 }
 
 .login_banner{
-	height:475px;
+	height:520px;
 }
 
 .login_form{
-	height:310px;
+	height: 565px;
+    margin-top: -60px;
 	width:406px;
 	float: right;
 	margin-right:50px;
-	margin-top: 50px;
 	background-color: #fff;
 }
 
 #content {
-	height: 475px;
+	height: 510px;
 	width: 1200px;
 }
 
 .login_box{
 	margin: 20px;
-	height: 260px;
+	height: 540px;
 	width: 366px;
 }
 
@@ -177,10 +177,10 @@ h1 {
     float: none;
     font-family: "宋体";
     font-size: 14px;
-    height: 18px;
+    height: 16px;
     line-height: 18px;
     overflow: hidden;
-    padding: 10px 0 10px 10px;
+    padding: 10px 0 7px 10px;
     width: 220px;
     border: 1px #e3e3e3 solid;
 }

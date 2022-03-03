@@ -28,11 +28,11 @@ func CheckUserName(username string) (*model.User_chenjunjie, error) {
 }
 
 //SaveUser 向数据库中插入用户信息
-func SaveUser(username string, password string, email string) error {
+func SaveUser(username string, password string, email string, phone string, rec_phone string) error {
 	//写sql语句
-	sqlStr := "insert into users(username,password,email) values(?,?,?)"
+	sqlStr := "insert into users(username,password,email,phone,rec_phone) values(?,?,?,?,?)"
 	//执行
-	_, err := utils.Db.Exec(sqlStr, username, password, email)
+	_, err := utils.Db.Exec(sqlStr, username, password, email, phone, rec_phone)
 	if err != nil {
 		return err
 	}

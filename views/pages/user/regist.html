@@ -7,8 +7,8 @@
 
 <style type="text/css">
 		.login_form{
-			height:420px;
-			margin-top: 25px;
+			height: 570px;
+    		margin-top: -60px;
 		}
 		html,body{
 		width: 100%;
@@ -154,6 +154,47 @@
 		});
 	});
 </script>
+<script>//验证码
+	var counts = 60;
+	function settime(val) {
+	 if(counts == 0) {
+	  val.removeAttribute("disabled");
+	  val.value = "获取验证码";
+	  counts = 60;
+	  return false;
+	 } else {
+	  val.setAttribute("disabled", true);
+	  val.value = "重新发送（" + counts + "）";
+	  counts--;
+	 }
+	 setTimeout(function() {
+	  settime(val);
+	 }, 1000);
+	}
+	$(function(){
+//获取验证码
+$("#verCodeBtn").click(function() {
+var userinfo = {
+"UserPhoneNum": '86//' + $("input[name='phone']").val()
+}
+$.ajax({
+url: "https://www.xxxxx.cn/user/sendcode/",
+data: userinfo,
+type: "get",
+success: function(data) {
+if(JSON.parse(data).state === 404 || JSON.parse(data).state === 202 || userinfo.UserPhoneNum === '86//') {
+ alert("验证码发送失败")
+} else {
+ alert("验证码发送成功，请耐心等待")
+}
+},
+error: function() {
+alert("发送失败");
+}
+});
+});
+})
+</script>
 </head>
 <body background="background.jpg"
 style=" background-repeat:no-repeat ;
@@ -189,13 +230,25 @@ background-attachment: fixed;">
 									<input class="itxt" type="password" placeholder="确认密码" autocomplete="off" tabindex="1" name="repwd" id="repwd" />
 									<br />
 									<br />
+									<label>手机号码：</label>
+									<input class="itxt" type="text" placeholder="请输入手机号码" value="" maxlength="11" autocomplete="off" tabindex="1" name="phone" id="phone" />
+									<br />
+									<br />
+									<input class="itxt" type="" name="verCode" id="verCode" value="" placeholder="请输入短信验证码" maxlength="6"/>
+									<input class="itxt" style="width:120px;height: 38px;" type="button" name="" id="verCodeBtn" value="获取验证码" onclick="settime(this);"/>
+									<br />
+									<br />
 									<label>电子邮件：</label>
 									<input class="itxt" type="text" placeholder="请输入邮箱地址" autocomplete="off" tabindex="1" name="email" id="email" />
 									<br />
 									<br />
-									<input type="text" value="" placeholder="请输入验证码" class="itxt" id="itxt">
+									<input type="text" value="" placeholder="请输入图形验证码" class="itxt" id="itxt">
 									<canvas title="刷新验证码" id="canvas" width="100" height="30"></canvas>	
 									<br />						
+									<br />
+									<label>推荐人手机：</label>
+									<input class="itxt" type="text" placeholder="请输入推荐人手机号" value="" maxlength="11" autocomplete="off" tabindex="1" name="rec_phone" id="rec_phone" />
+									<br />
 									<br />
 									<input type="submit" value="注册" id="sub_btn" />
 								</form>

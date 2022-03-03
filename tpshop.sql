@@ -11,7 +11,7 @@
  Target Server Version : 80011
  File Encoding         : 65001
 
- Date: 02/03/2022 16:36:19
+ Date: 03/03/2022 11:20:27
 */
 
 SET NAMES utf8mb4;
@@ -39,6 +39,8 @@ CREATE TABLE `users`  (
   `username` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `PASSWORD` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `email` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `phone` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `rec_phone` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`, `username`) USING BTREE,
   UNIQUE INDEX `username`(`username`) USING BTREE,
   INDEX `id`(`id`) USING BTREE

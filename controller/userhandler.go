@@ -13,6 +13,8 @@ func Regist(w http.ResponseWriter, r *http.Request) {
 	username := r.PostFormValue("username")
 	password := r.PostFormValue("password")
 	email := r.PostFormValue("email")
+	phone := r.PostFormValue("phone")
+	rec_phone := r.PostFormValue("rec_phone")
 	//调用userdao中验证用户名和密码的方法
 	user, _ := dao.CheckUserName(username)
 	if user.ID > 0 {
@@ -21,7 +23,7 @@ func Regist(w http.ResponseWriter, r *http.Request) {
 		t.Execute(w, "用户名已存在！")
 	} else {
 		//用户名可用，将用户信息保存到数据库中
-		dao.SaveUser(username, password, email)
+		dao.SaveUser(username, password, email, phone, rec_phone)
 		//用户名和密码正确
 		t := template.Must(template.ParseFiles("views/pages/user/regist_success.html"))
 		t.Execute(w, "")

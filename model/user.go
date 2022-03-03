@@ -6,4 +6,6 @@ type User_chenjunjie struct {
 	Username string
 	Password string
 	Email    string
+	Phone string
+	Rec_phone string
 }
