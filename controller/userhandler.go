@@ -19,14 +19,26 @@ func Regist(w http.ResponseWriter, r *http.Request) {
 	user, _ := dao.CheckUserName(username)
 	if user.ID > 0 {
 		//用户名已存在
-		t := template.Must(template.ParseFiles("views/pages/user/regist.html"))
+		t := template.Must(template.ParseFiles("views/pages/user/regist_failed.html"))
 		t.Execute(w, "用户名已存在！")
 	} else {
-		//用户名可用，将用户信息保存到数据库中
-		dao.SaveUser(username, password, email, phone, rec_phone)
-		//用户名和密码正确
-		t := template.Must(template.ParseFiles("views/pages/user/regist_success.html"))
-		t.Execute(w, "")
+		phonenum, _ := dao.CheckPhoneNum(phone)
+		if phonenum.ID > 0 {
+			t := template.Must(template.ParseFiles("views/pages/user/regist_failed.html"))
+			t.Execute(w, "该手机号已存在！")
+		} else {
+			uniqueEmail, _ := dao.CheckEmail(email)
+			if uniqueEmail.ID > 0 {
+				t := template.Must(template.ParseFiles("views/pages/user/regist_failed.html"))
+				t.Execute(w, "该邮箱已被注册！")		
+			} else {
+				//用户名可用，将用户信息保存到数据库中
+				dao.SaveUser(username, password, email, phone, rec_phone)
+				//用户名和密码正确
+				t := template.Must(template.ParseFiles("views/pages/user/regist_success.html"))
+				t.Execute(w, "")
+			}
+		}
 	}
 }
 
@@ -42,6 +54,26 @@ func CheckUserName(w http.ResponseWriter, r *http.Request) {
 	} else {
 		//用户名可用
 		w.Write([]byte("<font style='color:green'>用户名可用！</font>"))
+	}
+}
+
+func CheckPhoneNum(w http.ResponseWriter, r *http.Request) {
+	phone := r.PostFormValue("phone")
+	user, _ := dao.CheckPhoneNum(phone)
+	if user.ID > 0 {
+		w.Write([]byte("该手机号已经注册！"))
+	} else {
+		w.Write([]byte("<font style='color:green'>手机号可用！</font>"))
+	}
+}
+
+func CheckEmail(w http.ResponseWriter, r *http.Request) {
+	email := r.PostFormValue("email")
+	user, _ := dao.CheckEmail(email)
+	if user.ID > 0 {
+		w.Write([]byte("该邮箱已经注册！"))
+	} else {
+		w.Write([]byte("<font style='color:green'>该邮箱可用！</font>"))
 	}
 }
 

@@ -43,7 +43,7 @@
     alert('请输入验证码！');
 	return false;
    }else if(val == num){
-    alert('提交成功！');
+    // alert('提交成功！');
     $("#itxt").val('');
 	return ture;
     // draw(show_num);
@@ -115,8 +115,26 @@
 			var password = $("#password").val();
 			//获取用户输入的确认密码
 			var repwd = $("#repwd").val();
+			var phone = $("#phone").val();
+			var email = $("#email").val();
 			if(repwd == ""){
 				alert("确认密码不能为空！");
+				return false;
+			}
+			if(username == ""){
+				alert("用户名不能为空！");
+				return false;
+			}
+			if(password == ""){
+				alert("密码不能为空！");
+				return false;
+			}
+			if(phone == ""){
+				alert("手机号不能为空！");
+				return false;
+			}
+			if(email == ""){
+				alert("邮箱不能为空！");
 				return false;
 			}
 			//判断两次输入的密码是否一致
@@ -126,8 +144,10 @@
 				alert("两次输入的密码不一致！");
 				return false;
 			}
-			//获取用户输入的邮箱
-			var email = $("#email").val();
+			if(document.getElementById("agree").checked=false){
+				alert("请先阅读并同意《最好的B2BC商城服务协议》！");
+				return false;
+			}
 		});
 		//将显示错误提示信息的span标签隐藏
 		$("#msg").hide();
@@ -199,10 +219,12 @@ alert("发送失败");
 	function disable()
 	  {
 	  document.getElementById("sub_btn").disabled=true
+	  document.getElementById("sub_btn").style.cssText="background-color: #5D5D5D;"
 	  }
 	function enable()
 	  {
 	  document.getElementById("sub_btn").disabled=false
+	  document.getElementById("sub_btn").style.cssText="background-color: #39987c;"
 	  }
 	</script>
 </head>
@@ -260,7 +282,7 @@ background-attachment: fixed;">
 									<input class="itxt" type="text" placeholder="请输入推荐人手机号" value="" maxlength="11" autocomplete="off" tabindex="1" name="rec_phone" id="rec_phone" />
 									<br />
 									<div></div>
-									<input type="checkBox" onclick="if (this.checked) {enable()} else {disable()}">  我已阅读并同意<a href="#" style="text-decoration:none;color: blue;">《最好的B2BC商城服务协议》</a>
+									<input type="checkBox" id="agree" onclick="if (this.checked) {enable()} else {disable()}">  我已阅读并同意<a href="#" style="text-decoration:none;color: blue;">《最好的B2BC商城服务协议》</a>
 									<div></div>
 									<input type="submit" value="注册" disabled="true" id="sub_btn" />
 								</form>

@@ -19,11 +19,31 @@ func CheckUserNameAndPassword(username string, password string) (*model.User_che
 //CheckUserName 根据用户名和密码从数据库中查询一条记录
 func CheckUserName(username string) (*model.User_chenjunjie, error) {
 	//写sql语句
-	sqlStr := "select id,username,password,email from users where username = ?"
+	sqlStr := "select id,username,password,email,phone,rec_phone from users where username = ?"
 	//执行
 	row := utils.Db.QueryRow(sqlStr, username)
 	user := &model.User_chenjunjie{}
-	row.Scan(&user.ID, &user.Username, &user.Password, &user.Email)
+	row.Scan(&user.ID, &user.Username, &user.Password, &user.Email, &user.Phone, &user.Rec_phone)
+	return user, nil
+}
+
+func CheckPhoneNum(phone string) (*model.User_chenjunjie, error) {
+	//写sql语句
+	sqlStr := "select id,username,password,email,phone,rec_phone from users where phone = ?"
+	//执行
+	row := utils.Db.QueryRow(sqlStr, phone)
+	user := &model.User_chenjunjie{}
+	row.Scan(&user.ID, &user.Username, &user.Password, &user.Email, &user.Phone, &user.Rec_phone)
+	return user, nil
+}
+
+func CheckEmail(email string) (*model.User_chenjunjie, error) {
+	//写sql语句
+	sqlStr := "select id,username,password,email,phone,rec_phone from users where email = ?"
+	//执行
+	row := utils.Db.QueryRow(sqlStr, email)
+	user := &model.User_chenjunjie{}
+	row.Scan(&user.ID, &user.Username, &user.Password, &user.Email, &user.Phone, &user.Rec_phone)
 	return user, nil
 }
 
